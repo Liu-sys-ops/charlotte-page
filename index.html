@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>相知的待办清单</title>
+<style>
+body{
+  margin:0;
+  background-color:#ffe6ef;
+  font-family:SimSun, sans-serif;
+  color:#2b4b90;
+}
+
+a{
+  color:#2b4b90;
+  text-decoration:none;
+}
+
+a:hover{
+  color:#b83232;
+  text-decoration:underline;
+}
+
+h2{
+  color:#b83232;
+}
+
+.gallery-title{
+  text-align:center;
+  margin:30px 0 10px 0;
+  color:#2b4b90;
+}
+
+.gallery{
+  max-width:750px;
+  margin:0 auto 30px auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  padding:0 15px;
+}
+
+.gallery-item{
+  background:#fff;
+  border:2px solid #ffc1dd;
+  border-radius:12px;
+  padding:8px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(184,50,50,0.08);
+}
+
+.gallery-item img{
+  width:100%;
+  height:110px;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+}
+
+.gallery-item p{
+  margin:8px 0 0 0;
+  font-size:14px;
+  color:#2b4b90;
+  font-weight:bold;
+}
+
+.start-music-box{
+  text-align:center;
+  margin:20px 0;
+}
+#startBtn{
+  padding:12px 24px;
+  border:none;
+  background:#2b4b90;
+  color:#fff;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+#startBtn:hover{
+  background:#1f3870;
+}
+#audioStatus{
+  color:#b83232;
+  font-size:13px;
+  margin:8px 0 0 0;
+  min-height:18px;
+}
+
+.tab-wrap{
+  max-width:700px;
+  margin:30px auto;
+  background:#fff;
+  border-left:4px solid #2b4b90;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.tab-buttons{
+  display:flex;
+}
+
+.tab-btn{
+  flex:1;
+  padding:12px 0;
+  border:none;
+  background:#ffd6e8;
+  color:#2b4b90;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.tab-btn.active{
+  background:#2b4b90;
+  color:white;
+}
+
+.tab-content{
+  padding:20px;
+  line-height:1.7;
+  display:none;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+.footer{
+  background-color:#2b4b90;
+  text-align:center;
+  padding:30px;
+  font-size:12px;
+  color:#fff;
+  margin-top:40px;
+}
+
+.footer a{
+  color:#ffdddd;
+}
+</style>
+</head>
+<body>
+<audio id="audio" loop preload="auto">
+  <source src="bgm.mp3" type="audio/mpeg">
+  浏览器不支持音频播放
+</audio>
+
+<div style="background-color:#ffe6ef;text-align:center;padding:30px 15px 10px 15px;">
+  <img src='images/header.jpg' alt="liuxiangzhi" style="max-width:450px;width:100%;height:auto;border-radius:12px;">
+</div>
+
+<h2 class="gallery-title">友利奈绪 </h2>
+
+<div class="gallery">
+  <div class="gallery-item">
+    <img src="images/gallery1.jpg" alt="抓住">
+    <p>我见犹怜</p>
+  </div>
+  <div class="gallery-item">
+    <img src="images/gallery2.jpg" alt="默契">
+    <p>交给在下</p>
+  </div>
+  <div class="gallery-item">
+    <img src="images/gallery3.jpg" alt="博弈">
+    <p>互相伤害</p>
+  </div>
+  <div class="gallery-item">
+    <img src="images/gallery4.jpg" alt="记录">
+    <p>偷窥记录</p>
+  </div>
+  <div class="gallery-item">
+    <img src="images/gallery5.jpg" alt="心事">
+    <p>偶有心事</p>
+  </div>
+  <div class="gallery-item">
+    <img src="images/gallery6.jpg" alt="三小只">
+    <p>三小无猜</p>
+  </div>
+</div>
+<div class="start-music-box">
+  <button id="startBtn">🎵 点击开启背景音乐</button>
+  <p id="audioStatus" role="status"></p>
+</div>
+
+<div class="tab-wrap">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="changeTab('home', this)">首页</button>
+    <button class="tab-btn" onclick="changeTab('list', this)">待办清单</button>
+    <button class="tab-btn" onclick="changeTab('detail', this)">任务详情</button>
+  </div>
+
+  <div id="home" class="tab-content active">
+    <p>高清好看</p>
+    <p>抖音搜洪荒猛兽</p>
+    <p>我的网站</p>
+    <p>我的网站</p>
+  </div>
+
+  <div id="list" class="tab-content">
+    <h2>📋 待办清单列表</h2>
+    <ul style="line-height:2;">
+      <li>任务1：完善海报设计</li>
+      <li>任务2：学习HTML基础</li>
+      <li>任务3：整理创作素材</li>
+      <li>任务4：练习画图软件</li>
+    </ul>
+  </div>
+
+  <div id="detail" class="tab-content">
+    <h2>📄 任务详情：完善海报设计</h2>
+    <p>主题：适度，对抗选择过载</p>
+    <p>构图：上半碎片洪流，汇聚成水滴浇灌幼苗</p>
+    <p>要求：青年创作海报，跳出浅层环保</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>我的网站</p>
+  <a href="https://www.bilibili.com/bangumi/play/ss2572">友情链接</a>
+</div>
+
+<script>
+const audio = document.getElementById('audio');
+const startBtn = document.getElementById('startBtn');
+const audioStatus = document.getElementById('audioStatus');
+
+async function toggleMusic() {
+  if (audio.paused) {
+    try {
+      await audio.play();
+      startBtn.innerText = "⏸ 暂停音乐";
+      audioStatus.textContent = "";
+    } catch (err) {
+      startBtn.innerText = "🎵 点击开启背景音乐";
+      audioStatus.textContent = "音频加载失败：请确认 bgm.mp3 与网页在同一文件夹。";
+      console.error(err);
+    }
+  } else {
+    audio.pause();
+    startBtn.innerText = "🎵 继续播放";
+  }
+}
+
+startBtn.addEventListener("click", toggleMusic);
+audio.addEventListener("error", function () {
+  audioStatus.textContent = "音频加载失败：请确认 bgm.mp3 与网页在同一文件夹。";
+});
+audio.addEventListener("canplay", function () {
+  audioStatus.textContent = "";
+});
+
+function changeTab(id, btn){
+  const contents = document.querySelectorAll('.tab-content');
+  const btns = document.querySelectorAll('.tab-btn');
+
+  contents.forEach(c => c.classList.remove('active'));
+  btns.forEach(b => b.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
