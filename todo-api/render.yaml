@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: todo-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: TODO_DB_PATH
+        value: /opt/render/project/src/todos.db
