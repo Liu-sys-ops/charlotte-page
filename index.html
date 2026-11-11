@@ -87,6 +87,24 @@ h2{
   margin:8px 0 0 0;
   min-height:18px;
 }
+#fetchBtn{
+  padding:10px 20px;
+  border:2px solid #2b4b90;
+  background:#fff;
+  color:#2b4b90;
+  border-radius:8px;
+  font-size:15px;
+  cursor:pointer;
+}
+#fetchBtn:hover{
+  background:#eef3ff;
+}
+#fetchStatus{
+  color:#2b4b90;
+  font-size:13px;
+  margin:8px 0 0 0;
+  min-height:18px;
+}
 
 .tab-wrap{
   max-width:700px;
@@ -184,6 +202,11 @@ h2{
   <p id="audioStatus" role="status"></p>
 </div>
 
+<div class="start-music-box">
+  <button id="fetchBtn">📦 抓包练习：请求 data.json</button>
+  <p id="fetchStatus" role="status"></p>
+</div>
+
 <div class="tab-wrap">
   <div class="tab-buttons">
     <button class="tab-btn active" onclick="changeTab('home', this)">首页</button>
@@ -262,6 +285,7 @@ function changeTab(id, btn){
   if (btn) btn.classList.add('active');
 }
 </script>
+<script src="demo.js"></script>
 
 </body>
 </html>
