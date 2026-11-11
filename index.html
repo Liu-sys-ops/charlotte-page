@@ -106,6 +106,115 @@ h2{
   min-height:18px;
 }
 
+.todo-form{
+  display:flex;
+  gap:8px;
+  margin:14px 0 8px;
+}
+#todoInput{
+  flex:1;
+  min-width:0;
+  padding:10px 12px;
+  border:1px solid #ffc1dd;
+  border-radius:8px;
+  font-size:14px;
+  color:#2b4b90;
+  outline:none;
+}
+#todoInput:focus{
+  border-color:#2b4b90;
+}
+#todoAddBtn{
+  padding:10px 18px;
+  border:none;
+  background:#2b4b90;
+  color:#fff;
+  border-radius:8px;
+  font-size:14px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+#todoAddBtn:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+.todo-message{
+  min-height:18px;
+  margin:0 0 8px;
+  font-size:13px;
+  color:#2b4b90;
+}
+.todo-message.error{
+  color:#b83232;
+}
+.todo-state{
+  padding:22px 10px;
+  text-align:center;
+  color:#2b4b90;
+  font-size:14px;
+}
+.todo-state.error{
+  color:#b83232;
+}
+.todo-spinner{
+  display:none;
+  width:14px;
+  height:14px;
+  margin-right:7px;
+  border:2px solid #2b4b90;
+  border-top-color:transparent;
+  border-radius:50%;
+  vertical-align:-2px;
+  animation:spin .8s linear infinite;
+}
+.todo-state.loading .todo-spinner{
+  display:inline-block;
+}
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+#todoRetry{
+  margin-left:10px;
+  padding:5px 12px;
+  border:1px solid #b83232;
+  background:#fff;
+  color:#b83232;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+.todo-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.todo-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 2px;
+  border-bottom:1px solid #f3d7e4;
+}
+.todo-title{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.todo-delete{
+  flex-shrink:0;
+  padding:4px 10px;
+  border:1px solid #ffc1dd;
+  background:#fff;
+  color:#b83232;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+.todo-delete:disabled{
+  opacity:.5;
+  cursor:wait;
+}
+
 .tab-wrap{
   max-width:700px;
   margin:30px auto;
@@ -209,9 +318,9 @@ h2{
 
 <div class="tab-wrap">
   <div class="tab-buttons">
-    <button class="tab-btn active" onclick="changeTab('home', this)">首页</button>
-    <button class="tab-btn" onclick="changeTab('list', this)">待办清单</button>
-    <button class="tab-btn" onclick="changeTab('detail', this)">任务详情</button>
+    <button class="tab-btn active" data-tab="home" onclick="changeTab('home', this)">首页</button>
+    <button class="tab-btn" data-tab="list" onclick="changeTab('list', this)">待办清单</button>
+    <button class="tab-btn" data-tab="detail" onclick="changeTab('detail', this)">任务详情</button>
   </div>
 
   <div id="home" class="tab-content active">
@@ -223,12 +332,21 @@ h2{
 
   <div id="list" class="tab-content">
     <h2>📋 待办清单列表</h2>
-    <ul style="line-height:2;">
-      <li>任务1：完善海报设计</li>
-      <li>任务2：学习HTML基础</li>
-      <li>任务3：整理创作素材</li>
-      <li>任务4：练习画图软件</li>
-    </ul>
+
+    <form id="todoForm" class="todo-form">
+      <input id="todoInput" type="text" maxlength="100" placeholder="输入新任务..." autocomplete="off">
+      <button id="todoAddBtn" type="submit">新增</button>
+    </form>
+
+    <p id="todoMessage" class="todo-message" role="status"></p>
+
+    <div id="todoState" class="todo-state" hidden>
+      <span class="todo-spinner" aria-hidden="true"></span>
+      <span id="todoStateText"></span>
+      <button id="todoRetry" type="button" hidden>重试</button>
+    </div>
+
+    <ul id="todoList" class="todo-list" hidden></ul>
   </div>
 
   <div id="detail" class="tab-content">
@@ -286,6 +404,8 @@ function changeTab(id, btn){
 }
 </script>
 <script src="demo.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
