@@ -235,8 +235,9 @@ h2{
   background:#ffd6e8;
   color:#2b4b90;
   cursor:pointer;
-  font-size:16px;
+  font-size:15px;
   font-weight:bold;
+  white-space:nowrap;
 }
 
 .tab-btn.active{
@@ -252,6 +253,35 @@ h2{
 
 .tab-content.active{
   display:block;
+}
+
+.ai-panel{
+  text-align:center;
+  padding:10px 0 4px;
+}
+.ai-panel p{
+  font-size:14px;
+  color:#49526a;
+  line-height:1.8;
+}
+.ai-open-btn{
+  display:inline-block;
+  margin:12px 0 8px;
+  padding:12px 24px;
+  background:#2b4b90;
+  color:#fff;
+  text-decoration:none;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:bold;
+  box-shadow:0 6px 16px rgba(43,75,144,.18);
+}
+.ai-open-btn:hover{
+  background:#1f3870;
+}
+.ai-note{
+  font-size:12px !important;
+  color:#8a93a6 !important;
 }
 
 .footer{
@@ -321,6 +351,7 @@ h2{
     <button class="tab-btn active" data-tab="home" onclick="changeTab('home', this)">首页</button>
     <button class="tab-btn" data-tab="list" onclick="changeTab('list', this)">待办清单</button>
     <button class="tab-btn" data-tab="detail" onclick="changeTab('detail', this)">任务详情</button>
+    <button class="tab-btn" data-tab="ai" onclick="changeTab('ai', this)">AI 对话</button>
   </div>
 
   <div id="home" class="tab-content active">
@@ -354,6 +385,17 @@ h2{
     <p>主题：适度，对抗选择过载</p>
     <p>构图：上半碎片洪流，汇聚成水滴浇灌幼苗</p>
     <p>要求：青年创作海报，跳出浅层环保</p>
+  </div>
+
+  <div id="ai" class="tab-content">
+    <h2>🤖 星尘助手 · AI 对话</h2>
+    <div class="ai-panel">
+      <p>这是任务四接入的大模型对话页，支持流式输出、连续对话和停止生成。</p>
+      <a class="ai-open-btn" href="https://honghuang.pythonanywhere.com/chat" target="_blank" rel="noopener">
+        打开 AI 对话 →
+      </a>
+      <p class="ai-note">AI 对话页单独部署在 PythonAnywhere，会在新标签页打开。</p>
+    </div>
   </div>
 </div>
 
@@ -401,6 +443,11 @@ function changeTab(id, btn){
 
   document.getElementById(id).classList.add('active');
   if (btn) btn.classList.add('active');
+}
+
+if (location.hash === '#ai') {
+  const aiBtn = document.querySelector('.tab-btn[data-tab="ai"]');
+  if (aiBtn) aiBtn.click();
 }
 </script>
 <script src="demo.js"></script>
